@@ -1,0 +1,170 @@
+body {
+            font-family: 'Pretendard', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: #fff !important;
+        }
+
+        .swiper-pagination-bullet-active {
+            background: #D06A2C !important;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* 아코디언: flex transition은 Tailwind로 불가 */
+        .dest-item {
+            flex: 222;
+            transition: flex 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dest-item:first-child {
+            flex: 706;
+        }
+
+        .dest-accordion:hover .dest-item {
+            flex: 222;
+        }
+
+        .dest-accordion:hover .dest-item:hover {
+            flex: 706;
+        }
+
+        .dest-overlay {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .dest-accordion:hover .dest-item .dest-overlay {
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .dest-accordion:hover .dest-item:hover .dest-overlay {
+            opacity: 1;
+            transition: opacity 0.4s ease 0.2s;
+        }
+
+        .dest-item:hover .dest-overlay {
+            opacity: 1;
+            transition: opacity 0.4s ease;
+        }
+
+        .dest-item:first-child .dest-overlay {
+            opacity: 1;
+        }
+
+        .dest-item:first-child .dest-label {
+            opacity: 0;
+        }
+
+        .dest-accordion:hover .dest-item .dest-label {
+            opacity: 1;
+        }
+
+        .dest-accordion:hover .dest-item:first-child .dest-label {
+            opacity: 1;
+        }
+
+        .dest-accordion:hover .dest-item:hover .dest-label {
+            opacity: 0;
+        }
+
+        /* Restaurant Swiper */
+        .restaurant-swiper {
+            overflow: visible !important;
+        }
+
+        .restaurant-swiper .swiper-slide {
+            width: 791px;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* 오른쪽 슬라이드들만 228px 더 뒤로 밀어서, 텍스트 박스 공간(298px 튀어나옴 + 57px 여백 = 355px)을 정확히 확보합니다. 기본 127px + 228px = 355px */
+        .restaurant-swiper .swiper-slide-next,
+        .restaurant-swiper .swiper-slide-active~.swiper-slide {
+            transform: translateX(228px);
+        }
+
+        /* Text overlay - only on active slide */
+        .restaurant-swiper .swiper-slide .rest-text-overlay {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease 0.1s, transform 0.5s ease 0.1s;
+            pointer-events: none;
+        }
+
+        .restaurant-swiper .swiper-slide-active .rest-text-overlay {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        /* Restaurant custom progress bar */
+        .rest-nav-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-top: 127px;
+        }
+
+        .rest-nav-inner {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            width: 465px;
+        }
+
+        .rest-progress-bar {
+            position: relative;
+            flex: 1;
+            height: 3px;
+            background: #C0C0C0;
+            border-radius: 2px;
+        }
+
+        .rest-progress-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: #D06A2C;
+            border-radius: 2px;
+            transition: width 0.4s ease;
+        }
+
+        .rest-nav-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 16px;
+            color: #D06A2C;
+            cursor: pointer;
+            transition: color 0.3s;
+            user-select: none;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        .rest-nav-btn:hover {
+            color: #a54f1a;
+        }
+
+        .rest-nav-btn svg {
+            width: 18px;
+            height: 18px;
+            stroke: #D06A2C;
+        }
+
+        .rest-nav-btn:hover svg {
+            stroke: #a54f1a;
+        }
