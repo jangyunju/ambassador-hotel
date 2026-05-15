@@ -1,7 +1,26 @@
-body {
+/* ─── 기준: 1rem = 10px ─── */
+        html {
+            font-size: 62.5%;
+        }
+
+        body {
+            font-size: 1.6rem; /* = 16px */
             font-family: 'Pretendard', sans-serif;
             scroll-behavior: smooth;
         }
+
+        /* ─── Visual 타이틀 유체 타이포그래피 ─── */
+        /* clamp(최소, 기준vw, 최대) → 화면에 따라 부드럽게 변함 */
+        .visual-title-main {
+            /* 32px(모바일) → 부드럽게 → 160px(1200px 화면) */
+            font-size: clamp(3.2rem, 13.3vw, 16rem);
+        }
+        .visual-title-sub {
+            /* 32px(모바일) → 부드럽게 → 140px(1200px 화면) */
+            font-size: clamp(3.2rem, 11.7vw, 14rem);
+        }
+
+
 
         .swiper-button-next,
         .swiper-button-prev {
@@ -21,62 +40,87 @@ body {
             scrollbar-width: none;
         }
 
-        /* 아코디언: flex transition은 Tailwind로 불가 */
-        .dest-item {
-            flex: 222;
-            transition: flex 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+/* ─── 모바일: Destination 아코디언 → 세로 나열 ─── */
+        @media (max-width: 1199px) {
+            .dest-accordion {
+                flex-direction: column !important;
+                height: auto !important;
+            }
+            .dest-item,
+            .dest-item:first-child {
+                flex: none !important;
+                width: 100% !important;
+                height: 20rem !important;
+            }
+            .dest-item .dest-overlay {
+                opacity: 1 !important;
+            }
+            .dest-item .dest-label {
+                opacity: 0 !important;
+            }
+            .dest-item:first-child .dest-overlay {
+                opacity: 1 !important;
+            }
+            /* 설명 p 숨김 */
+            .dest-overlay p,
+            .dest-overlay div {
+                display: none !important;
+            }
         }
 
-        .dest-item:first-child {
-            flex: 706;
+        /* ─── 모바일: Stay Swiper 슬라이드 flex-col ─── */
+        @media (max-width: 1199px) {
+            .stay-swiper .swiper-slide > div {
+                flex-direction: column !important;
+                gap: 2rem;
+            }
+            .stay-swiper .swiper-slide .w-\[450px\] {
+                width: 100% !important;
+            }
+            /* 서비스 탙스트 2줄 제한 */
+            .stay-swiper .swiper-slide .space-y-6 > div:last-child p:last-child {
+                display: -webkit-box !important;
+                -webkit-line-clamp: 2 !important;
+                -webkit-box-orient: vertical !important;
+                overflow: hidden !important;
+            }
+            .stay-swiper .swiper-slide .w-\[750px\] {
+                width: 100% !important;
+                height: 28rem !important;
+                position: relative !important;
+            }
+            .stay-swiper .swiper-slide .w-\[750px\] img:first-child {
+                position: relative !important;
+                top: auto !important;
+                right: auto !important;
+                width: 100% !important;
+                height: 28rem !important;
+            }
+            .stay-swiper .swiper-slide .w-\[750px\] img:last-child {
+                display: none !important;
+            }
         }
 
-        .dest-accordion:hover .dest-item {
-            flex: 222;
-        }
-
-        .dest-accordion:hover .dest-item:hover {
-            flex: 706;
-        }
-
-        .dest-overlay {
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .dest-accordion:hover .dest-item .dest-overlay {
-            opacity: 0;
-            transition: opacity 0.2s ease;
-        }
-
-        .dest-accordion:hover .dest-item:hover .dest-overlay {
-            opacity: 1;
-            transition: opacity 0.4s ease 0.2s;
-        }
-
-        .dest-item:hover .dest-overlay {
-            opacity: 1;
-            transition: opacity 0.4s ease;
-        }
-
-        .dest-item:first-child .dest-overlay {
-            opacity: 1;
-        }
-
-        .dest-item:first-child .dest-label {
-            opacity: 0;
-        }
-
-        .dest-accordion:hover .dest-item .dest-label {
-            opacity: 1;
-        }
-
-        .dest-accordion:hover .dest-item:first-child .dest-label {
-            opacity: 1;
-        }
-
-        .dest-accordion:hover .dest-item:hover .dest-label {
-            opacity: 0;
+        /* ─── PC(1200px+): 아코디언 원본 복구 ─── */
+        @media (min-width: 1200px) {
+            .dest-item {
+                flex: 222;
+                transition: flex 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+                height: 100% !important;
+                width: auto !important;
+            }
+            .dest-item:first-child { flex: 706; }
+            .dest-accordion:hover .dest-item { flex: 222; }
+            .dest-accordion:hover .dest-item:hover { flex: 706; }
+            .dest-overlay { opacity: 0; transition: opacity 0.3s ease; }
+            .dest-accordion:hover .dest-item .dest-overlay { opacity: 0; }
+            .dest-accordion:hover .dest-item:hover .dest-overlay { opacity: 1; transition: opacity 0.4s ease 0.2s; }
+            .dest-item:hover .dest-overlay { opacity: 1; }
+            .dest-item:first-child .dest-overlay { opacity: 1; }
+            .dest-item:first-child .dest-label { opacity: 0; }
+            .dest-accordion:hover .dest-item .dest-label { opacity: 1; }
+            .dest-accordion:hover .dest-item:first-child .dest-label { opacity: 1; }
+            .dest-accordion:hover .dest-item:hover .dest-label { opacity: 0; }
         }
 
         /* Restaurant Swiper */
@@ -95,7 +139,7 @@ body {
             transform: translateX(228px);
         }
 
-        /* Text overlay - only on active slide */
+        /* Text overlay - only on active slide (PC 기본) */
         .restaurant-swiper .swiper-slide .rest-text-overlay {
             opacity: 0;
             transform: translateY(20px);
@@ -107,6 +151,30 @@ body {
             opacity: 1;
             transform: translateY(0);
             pointer-events: auto;
+        }
+
+        /* ─── 모바일: 텍스트 박스 항상 표시, 자연 흐름 배치 ─── */
+        @media (max-width: 1199px) {
+            .restaurant-swiper .swiper-slide {
+                width: 100% !important;
+                transform: none !important;
+            }
+            .restaurant-swiper .swiper-slide-next,
+            .restaurant-swiper .swiper-slide-active ~ .swiper-slide {
+                transform: none !important;
+            }
+            .restaurant-swiper .swiper-slide .rest-text-overlay {
+                position: relative !important;
+                opacity: 1 !important;
+                transform: none !important;
+                pointer-events: auto !important;
+                width: 100% !important;
+                height: 15rem !important;
+                left: auto !important;
+                bottom: auto !important;
+                overflow: hidden !important;
+                box-sizing: border-box !important;
+            }
         }
 
         /* Restaurant custom progress bar */
