@@ -7,6 +7,7 @@
             font-size: 1.6rem; /* = 16px */
             font-family: 'Pretendard', sans-serif;
             scroll-behavior: smooth;
+            overflow-x: hidden; /* iframe에서 가로 스크롤 방지 */
         }
 
         /* ─── Visual 타이틀 유체 타이포그래피 ─── */
@@ -169,10 +170,11 @@
                 transform: none !important;
                 pointer-events: auto !important;
                 width: 100% !important;
-                height: 15rem !important;
+                height: auto !important;         /* 15rem 고정 → 자동으로 변경 */
+                min-height: 12rem;
                 left: auto !important;
                 bottom: auto !important;
-                overflow: hidden !important;
+                overflow: visible !important;    /* hidden → visible: 잘림 방지 */
                 box-sizing: border-box !important;
             }
         }
@@ -236,3 +238,31 @@
         .rest-nav-btn:hover svg {
             stroke: #a54f1a;
         }
+
+        /* ─── 모바일: Restaurant 네비게이션 오버플로우 수정 ─── */
+        @media (max-width: 1199px) {
+            .rest-nav-wrapper {
+                margin-top: 2.4rem;
+                padding: 0 1.6rem;
+                box-sizing: border-box;
+            }
+            .rest-nav-inner {
+                width: 100%;
+                max-width: 100%;
+                box-sizing: border-box;
+            }
+
+            /* ─── 배너 섹션 잘림 방지 ─── */
+            .section.banner {
+                max-width: 100vw;
+                overflow: hidden;
+            }
+            .section.banner img {
+                max-width: 100%;
+            }
+            .section.banner h2 {
+                word-break: keep-all;
+                font-size: 2.8rem !important;
+            }
+        }
+
